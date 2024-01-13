@@ -9,7 +9,7 @@
 - [How to Start](#how-to-start)
 - [How to Use](#how-to-use)
 - [Example](#example)
-- [Authors](./AUTHORS)
+- [Authors](#authors)
 
 ## Project Description
 
