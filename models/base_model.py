@@ -1,36 +1,52 @@
 #!/usr/bin/python3
 """This module defines a base class for all models in our hbnb clone"""
-from models.base_model import BaseModel
-from datetime import datetime
+from datetime import datetime, timezone
 import uuid
+import json
 
 class BaseModel:
-    """BaseModel class for the HBNB project."""
-
     def __init__(self, *args, **kwargs):
-        """Initializes a new instance."""
+        """Initialize BaseModel instance."""
         if kwargs:
             for key, value in kwargs.items():
+                if key == 'created_at' or key == 'updated_at':
+                    value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
                 if key != '__class__':
                     setattr(self, key, value)
-            self.created_at = datetime.strptime(kwargs['created_at'], "%Y-%m-%dT%H:%M:%S.%f")
-            self.updated_at = datetime.strptime(kwargs['updated_at'], "%Y-%m-%dT%H:%M:%S.%f")
-        else:
-            self.id = str(uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
-            storage.new(self)
-            storage.save()
+            if hasattr(self, 'created_at') and type(self.created_at) is datetime:
+                pass
+            else:
+                self.created_at = datetime.now()
+                self.updated_at = datetime.now()
+            if not hasattr(self, 'id'):
+                self.id = str(uuid.uuid4())
 
     def save(self):
-        """Saves the instance to the storage."""
+        """Update the updated_at attribute and save the instance to storage."""
         self.updated_at = datetime.now()
+        from models.engine.file_storage import storage
         storage.save()
 
     def to_dict(self):
-        """Returns a dictionary representation of the instance."""
+        """Return a dictionary representation of the instance."""
         obj_dict = self.__dict__.copy()
         obj_dict['__class__'] = self.__class__.__name__
         obj_dict['created_at'] = self.created_at.isoformat()
         obj_dict['updated_at'] = self.updated_at.isoformat()
         return obj_dict
+
+    def __str__(self):
+        """Return the string representation of the instance."""
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__, self.id, str(self.__dict__))
+
+    def recreate_instance(self, dictionary):
+        """Recreate a BaseModel instance from a dictionary representation."""
+        from models import storage
+        instance = storage.get(dictionary['__class__'])(**dictionary)
+        return instance
+
+    def delete(self):
+        """Delete the current instance from storage."""
+        from models import storage
+        storage.delete(self)

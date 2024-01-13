@@ -56,8 +56,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(my_model_json['my_number'], 89)
 
     def test_str_method(self):
-        """ Test if __str__ method returns the
-        correct string representation """
+        """Test if __str__ method returns the correct string representation"""
         my_model = BaseModel()
         string_representation = str(my_model)
         class_name = my_model.__class__.__name__
@@ -66,12 +65,11 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn(str(my_model.__dict__), string_representation)
 
     def test_instance_recreation(self):
-        """ Test if a new instance can be recreated
-        from a dictionary representation """
+        """Test if a new instance can be recreated
+        from a dictionary representation"""
         my_model = BaseModel()
         my_model.name = "My_First_Model"
-        my_model.my_number = 89
-        my_model_json = my_model.to_dict()
+        my_model.my_number
 
         my_new_model = BaseModel(**my_model_json)
         self.assertEqual(my_model.id, my_new_model.id)
