@@ -2,7 +2,7 @@
 """ Test module for BaseModel """
 from datetime import datetime
 from models.base_model import BaseModel
-from models.storage import storage
+from models.engine.file_storage import Storage
 import os
 import time
 import unittest

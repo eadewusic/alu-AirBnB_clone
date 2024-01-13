@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This module defines a base class for all models in our hbnb clone"""
 from datetime import datetime
-from models import storage  # Import the storage module
+from models.engine.file_storage import Storage # Import the storage module
 import uuid
 
 
