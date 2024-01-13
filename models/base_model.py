@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """This module defines a base class for all models in our hbnb clone"""
-import datetime
-from uuid import uuid4
-from models import storage
+from models.base_model import BaseModel
+from datetime import datetime
+import uuid
 
 class BaseModel:
     """BaseModel class for the HBNB project."""

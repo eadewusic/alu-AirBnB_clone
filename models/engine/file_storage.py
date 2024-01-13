@@ -1,5 +1,6 @@
 # models/engine/file_storage.py
 from models.base_model import BaseModel
+from models import storage
 # from os.path import exists
 import json
 
