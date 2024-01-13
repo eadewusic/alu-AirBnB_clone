@@ -1,5 +1,7 @@
-import json
+# models/engine/file_storage.py
+from models.base_model import BaseModel
 from os.path import exists
+import json
 
 class FileStorage:
     """Serializes instances to a JSON file and deserializes JSON file to instances."""
