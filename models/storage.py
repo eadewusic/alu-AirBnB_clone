@@ -1,9 +1,11 @@
+from importlib import import_module
+import os
 import json
 
 class Storage:
     """Simple storage class for managing instances"""
 
-    __file_path = "file.json"  # JSON file to save instances
+    __file_path = os.path.join("models", "file.json")
     __objects = {}  # Dictionary to store instances
 
     def all(self):
@@ -31,12 +33,16 @@ class Storage:
                 data = json.load(file)
                 for key, obj_dict in data.items():
                     class_name, obj_id = key.split('.')
-                    module = __import__("models." + class_name, fromlist=[class_name])
+                    module = import_module("models." + class_name)
                     class_ = getattr(module, class_name)
                     instance = class_(**obj_dict)
                     self.__objects[key] = instance
         except FileNotFoundError:
+            # Handle the case where the file does not exist
             pass
+        except Exception as e:
+            print(f"Error during reload: {e}")
+
 
 # Creating a singleton instance of Storage
 storage = Storage()
