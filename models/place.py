@@ -1,5 +1,5 @@
 # models/place.py
-from models.base_model import BaseModel
+from .base_model import BaseModel
 
 class Place(BaseModel):
     """Place class for the HBNB project."""
