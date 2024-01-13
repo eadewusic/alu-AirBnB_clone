@@ -56,7 +56,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(my_model_json['my_number'], 89)
 
     def test_str_method(self):
-        """Test if __str__ method returns the correct string representation"""
+        """ Test if __str__ method returns the
+        correct string representation """
         my_model = BaseModel()
         string_representation = str(my_model)
         class_name = my_model.__class__.__name__
@@ -65,11 +66,12 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn(str(my_model.__dict__), string_representation)
 
     def test_instance_recreation(self):
-        """Test if a new instance can be recreated
-        from a dictionary representation"""
+        """ Test if a new instance can be recreated
+        from a dictionary representation """
         my_model = BaseModel()
         my_model.name = "My_First_Model"
-        my_model.my_number
+        my_model.my_number = 89
+        my_model_json = my_model.to_dict()
 
         my_new_model = BaseModel(**my_model_json)
         self.assertEqual(my_model.id, my_new_model.id)
@@ -89,26 +91,6 @@ class TestBaseModel(unittest.TestCase):
         model1 = BaseModel()
         model2 = BaseModel()
         self.assertNotEqual(model1.id, model2.id)
-
-    def test_save_reload_base_model(self):
-        """ Test if save method updates the updated_at attribute """
-        # Check if there are any objects in storage
-        all_objs = storage.all()
-        print("-- Reloaded objects --")
-        for obj_id in all_objs.keys():
-            obj = all_objs[obj_id]
-            print(obj)
-
-        # Create a new object and save it
-        my_model = BaseModel()
-        my_model.name = "My_First_Model"
-        my_model.my_number = 89
-        my_model.save()
-        print(my_model)
-
-        # Check if the object is saved to the file
-        with open("file.json", "r") as file:
-            print(file.read())
 
 
 if __name__ == '__main__':

@@ -1,7 +1,4 @@
 # models/engine/file_storage.py
-from models.base_model import BaseModel
-from models import storage
-# from os.path import exists
 import json
 
 class FileStorage:
@@ -22,8 +19,14 @@ class FileStorage:
     def save(self):
         """Serializes __objects to the JSON file (path: __file_path)."""
         serialized_objects = {}
+        
+        # Import BaseModel locally to avoid circular import
+        from models.base_model import BaseModel
+
         for key, obj in self.__objects.items():
-            serialized_objects[key] = obj.to_dict()
+            if isinstance(obj, BaseModel):
+                # Convert BaseModel instances to dictionary
+                serialized_objects[key] = obj.to_dict()
 
         with open(self.__file_path, 'w') as file:
             json.dump(serialized_objects, file)
@@ -36,7 +39,11 @@ class FileStorage:
 
             for key, value in loaded_objects.items():
                 class_name, obj_id = key.split('.')
-                obj_instance = eval(class_name)(**value)
+                
+                # Import BaseModel locally to avoid circular import
+                from models.base_model import BaseModel
+
+                obj_instance = BaseModel(**value)
                 self.__objects[key] = obj_instance
 
         except FileNotFoundError:
