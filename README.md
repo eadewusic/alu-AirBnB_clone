@@ -9,7 +9,7 @@
 - [How to Start](#how-to-start)
 - [How to Use](#how-to-use)
 - [Example](#example)
-- [Authors](#authors)
+- [Authors](./AUTHORS)
 
 ## Project Description
 
@@ -72,5 +72,4 @@ $ ./console.py
 
 ## Authors
 
-- Lindah Nyambura <l.nyambura@alustudent.com>
-- Eunice Adewusi (Climiradi) <e.adewusi@alustudent.com>
+See list [here](./AUTHORS)
