@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """This module defines a base class for all models in our hbnb clone"""
-import uuid
 from datetime import datetime
+from models import storage  # Import the storage module
+import uuid
 
 
 class BaseModel:
@@ -9,7 +10,7 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
         if not kwargs:
-            from models import storage
+            from models.storage import storage
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
@@ -28,10 +29,9 @@ class BaseModel:
         return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
 
     def save(self):
-        """Updates updated_at with current time when instance is changed"""
-        from models import storage
+        """Updates updated_at with the current time and saves the instance"""
         self.updated_at = datetime.now()
-        storage.save()
+        storage.save()  # Use the storage module to save the instance
 
     def to_dict(self):
         """Convert instance into dict format"""

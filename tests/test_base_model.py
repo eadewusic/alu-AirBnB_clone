@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 """ Test module for BaseModel """
-from models.base_model import BaseModel
 from datetime import datetime
-import unittest
+from models.base_model import BaseModel
+from models.storage import storage
 import os
+import time
+import unittest
 
 class TestBaseModel(unittest.TestCase):
     """ Test cases for BaseModel class """
@@ -27,6 +29,7 @@ class TestBaseModel(unittest.TestCase):
         """ Test if save method updates the updated_at attribute """
         my_model = BaseModel()
         original_updated_at = my_model.updated_at
+        time.sleep(1)  # Introduce a delay of 1 second
         my_model.save()
         self.assertGreater(my_model.updated_at, original_updated_at)
 
