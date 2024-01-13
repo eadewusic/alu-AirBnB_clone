@@ -3,6 +3,7 @@
 import uuid
 from datetime import datetime, timezone
 
+
 class BaseModel:
     def __init__(self, *args, **kwargs):
         time_format = "%Y-%m-%dT%H:%M:%S.%f"
@@ -11,7 +12,7 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key == "__class__":
                     continue
-                
+
                 elif key == "created_at" or key == "updated_at":
                     setattr(self, key, datetime.strptime(value, time_format))
                 else:
@@ -39,9 +40,11 @@ class BaseModel:
         class_name = self.__class__.__name__
         return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
 
+
 if __name__ == "__main__":
     my_model = BaseModel()
     my_model.name = "My_First_Model"
+
     my_model.my_number = 89
     print(my_model.id)
     print(my_model)
@@ -51,7 +54,9 @@ if __name__ == "__main__":
     print(my_model_json)
     print("JSON of my_model:")
     for key in my_model_json.keys():
-        print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
+        print("\t{}: ({}) - {}".format(
+            key, type(my_model_json[key]), my_model_json[key]
+        ))
 
     print("--")
     my_new_model = BaseModel(**my_model_json)
