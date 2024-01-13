@@ -2,6 +2,7 @@ from importlib import import_module
 import os
 import json
 
+
 class Storage:
     """Simple storage class for managing instances"""
 
