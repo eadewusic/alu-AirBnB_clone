@@ -1,5 +1,6 @@
 # models/engine/file_storage.py
 import json
+from models import storage
 
 class FileStorage:
     """Class for serializing and deserializing instances to/from JSON file."""
