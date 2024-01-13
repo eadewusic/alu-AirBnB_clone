@@ -1,49 +1,34 @@
-from importlib import import_module
-import os
 import json
+from os.path import exists
 
-
-class Storage:
-    """Simple storage class for managing instances"""
-
-    __file_path = os.path.join("models", "file.json")
-    __objects = {}  # Dictionary to store instances
+class FileStorage:
+    """Serializes instances to a JSON file and deserializes JSON file to instances."""
+    
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
-        """Returns the dictionary of instances"""
-        return self.__objects
+        """Returns the dictionary __objects."""
+        return FileStorage.__objects
 
     def new(self, obj):
-        """Adds a new instance to the storage"""
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.__objects[key] = obj
+        """Sets in __objects the obj with key <obj class name>.id."""
+        key = f"{obj.__class__.__name__}.{obj.id}"
+        FileStorage.__objects[key] = obj
 
     def save(self):
-        """Serializes and saves the instances to a JSON file"""
-        serialized_objects = {}
-        for key, obj in self.__objects.items():
-            serialized_objects[key] = obj.to_dict()
-
-        with open(self.__file_path, 'w') as file:
+        """Serializes __objects to the JSON file."""
+        serialized_objects = {k: v.to_dict() for k, v in FileStorage.__objects.items()}
+        with open(FileStorage.__file_path, 'w', encoding='utf-8') as file:
             json.dump(serialized_objects, file)
 
     def reload(self):
-        """Deserializes and reloads instances from a JSON file"""
-        try:
-            with open(self.__file_path, 'r') as file:
-                data = json.load(file)
-                for key, obj_dict in data.items():
+        """Deserializes the JSON file to __objects."""
+        if exists(FileStorage.__file_path):
+            with open(FileStorage.__file_path, 'r', encoding='utf-8') as file:
+                loaded_objects = json.load(file)
+                for key, value in loaded_objects.items():
                     class_name, obj_id = key.split('.')
-                    module = import_module("models." + class_name)
-                    class_ = getattr(module, class_name)
-                    instance = class_(**obj_dict)
-                    self.__objects[key] = instance
-        except FileNotFoundError:
-            # Handle the case where the file does not exist
-            pass
-        except Exception as e:
-            print(f"Error during reload: {e}")
+                    obj_instance = eval(class_name)(**value)
+                    FileStorage.__objects[key] = obj_instance
 
-
-# Creating a singleton instance of Storage
-storage = Storage()

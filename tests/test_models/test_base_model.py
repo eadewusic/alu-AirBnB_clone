@@ -92,6 +92,26 @@ class TestBaseModel(unittest.TestCase):
         model2 = BaseModel()
         self.assertNotEqual(model1.id, model2.id)
 
+    def test_save_reload_base_model(self):
+        """ Test if save method updates the updated_at attribute """
+        # Check if there are any objects in storage
+        all_objs = storage.all()
+        print("-- Reloaded objects --")
+        for obj_id in all_objs.keys():
+            obj = all_objs[obj_id]
+            print(obj)
+
+        # Create a new object and save it
+        my_model = BaseModel()
+        my_model.name = "My_First_Model"
+        my_model.my_number = 89
+        my_model.save()
+        print(my_model)
+
+        # Check if the object is saved to the file
+        with open("file.json", "r") as file:
+            print(file.read())
+
 
 if __name__ == '__main__':
     unittest.main()
