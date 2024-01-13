@@ -21,11 +21,10 @@ class BaseModel:
             if not hasattr(self, 'id'):
                 self.id = str(uuid.uuid4())
 
-    def save(self):
+    def save(self, storage_instance):
         """Update the updated_at attribute and save the instance to storage."""
         self.updated_at = datetime.now()
-        from models.engine.file_storage import storage
-        storage.save()
+        storage_instance.save()
 
     def to_dict(self):
         """Return a dictionary representation of the instance."""
@@ -40,10 +39,9 @@ class BaseModel:
         return "[{}] ({}) {}".format(
             self.__class__.__name__, self.id, str(self.__dict__))
 
-    def recreate_instance(self, dictionary):
+    def recreate_instance(self, dictionary, class_reference):
         """Recreate a BaseModel instance from a dictionary representation."""
-        from models import storage
-        instance = storage.get(dictionary['__class__'])(**dictionary)
+        instance = class_reference(**dictionary)
         return instance
 
     def delete(self):
