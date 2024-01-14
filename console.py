@@ -5,8 +5,9 @@ for the command interpreter.
 """
 
 import cmd
+import re
 from models.state import State
-from models.storage import Storage
+from models import storage
 from models.amenity import Amenity
 from models.user import User
 from models.city import City
