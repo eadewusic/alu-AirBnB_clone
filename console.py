@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-This module contains the entry point for the command interpreter.
+This module contains the entry point
+for the command interpreter.
 """
 
 import cmd
