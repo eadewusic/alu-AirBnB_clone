@@ -81,23 +81,17 @@ class HBNBCommand(cmd.Cmd):
         else:
             return args
 
-    def do_help(self, arg: str) -> bool | None:
-        '''
-        Method to handle help command
-        '''
-        return super().do_help(arg)
-
     def emptyline(self) -> bool:
         '''
         Method to handle empty line
         '''
         pass
 
-    def help_quit(self) -> None:
-        '''
-        Method to print help for quit command
-        '''
-        print("Quit command to exit the program")
+    def precmd(self, args):
+        """
+        Preprocess the args
+        """
+        return (self._formatter(args))
 
     def do_quit(self, arg: str) -> bool:
         """Quit command to exit the program."""
