@@ -24,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
     EOF - exit the program
     """
     prompt = "(hbnb) "
-    models = {"Amenity": Amenity, "BaseModel": BaseModel,
+    classes = {"Amenity": Amenity, "BaseModel": BaseModel,
                "City": City, "Place": Place, "Review": Review,
                "State": State, "User": User}
 
@@ -126,7 +126,7 @@ class HBNBCommand(cmd.Cmd):
         args = args.split()
         if len(args) < 1:
             print("** class name missing **")
-        elif args[0] not in HBNBCommand.models:
+        elif args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
