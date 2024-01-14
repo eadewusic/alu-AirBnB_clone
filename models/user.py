@@ -1,8 +1,19 @@
-# models/user.py
+#!/usr/bin/python3
+"""
+User class that inherits from BaseModel.
+"""
+
 from models.base_model import BaseModel
 
 class User(BaseModel):
-    """User class for the HBNB project."""
+    """
+    User class with public attributes:
+    - email (string, empty string)
+    - password (string, empty string)
+    - first_name (string, empty string)
+    - last_name (string, empty string)
+    """
+
     email = ""
     password = ""
     first_name = ""
