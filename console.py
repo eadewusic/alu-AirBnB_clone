@@ -143,5 +143,12 @@ class HBNBCommand(cmd.Cmd):
             print(len(class_objs))
 
 
+    def do_quit(self, args):
+        """
+        Exit the program.
+        """
+        print("Goodbye!")
+        return True
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

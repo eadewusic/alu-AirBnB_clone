@@ -1,6 +1,6 @@
 # AirBnB Clone Project
 
-![Project Preview](./images/.png)
+![Project Preview](./images/Eunice_and_Lindah_console.py_Sun.png)
 
 ## Table of Contents
 
