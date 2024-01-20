@@ -159,11 +159,7 @@ class HBNBCommand(cmd.Cmd):
         """
         return True
    
-   def emptyline(self):
-       """
-       Overides the default emptyline method to do nothing
-       """
-       pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
