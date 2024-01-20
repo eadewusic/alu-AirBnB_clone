@@ -42,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
         Creates and saves a new object
         ex: create BaseModel
         '''
-        if not args():
+        if not args:
             print("**class name missing**")
         elif args not in self.classes:
             print("**class doesn't exist**")
