@@ -7,3 +7,8 @@ class Review(BaseModel):
     place_id = ""
     user_id = ""
     text = ""
+
+    def to_dict(self):
+        """Convert instance into dict format"""
+        dictionary = super().to_dict()
+        return dictionary

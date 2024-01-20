@@ -15,3 +15,8 @@ class Place(BaseModel):
     latitude = 0.0
     longitude = 0.0
     amenity_ids = []
+
+    def to_dict(self):
+        """Convert instance into dict format"""
+        dictionary = super().to_dict()
+        return dictionary

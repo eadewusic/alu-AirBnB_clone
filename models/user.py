@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+# models/user.py
 """
 User class that inherits from BaseModel.
 """
@@ -18,3 +18,8 @@ class User(BaseModel):
     password = ""
     first_name = ""
     last_name = ""
+
+    def to_dict(self):
+        """Convert instance into dict format"""
+        dictionary = super().to_dict()
+        return dictionary
