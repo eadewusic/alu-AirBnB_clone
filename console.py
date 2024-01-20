@@ -151,6 +151,11 @@ class HBNBCommand(cmd.Cmd):
         print("Goodbye!")
         return True
 
+    def do_EOF(self, args):
+        """
+        (Ctrl+D or Ctrl+Z) EOF signal to exit the program
+        """
+        return True
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
