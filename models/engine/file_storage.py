@@ -1,16 +1,8 @@
-#!/usr/bin/python3
-"""This module defines a class to manage file storage for hbnb clone"""
 import json
 import inspect
 import sys
+import os
 from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.city import City
-from models.place import Place
-from models.amenity import Amenity
-from models.review import Review
-
 
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
@@ -51,5 +43,11 @@ class FileStorage:
                         cls = globals().get(class_name)
                         if cls and inspect.isclass(cls) and issubclass(cls, BaseModel):
                             FileStorage.__objects[key] = cls(**value)
-        except (FileNotFoundError, json.JSONDecodeError, NameError, IOError):
+        except FileNotFoundError:
+            pass
+        except json.JSONDecodeError:
+            pass
+        except NameError:
+            pass
+        except IOError:
             pass

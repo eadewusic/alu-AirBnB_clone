@@ -162,7 +162,7 @@ class HBNBCommand(cmd.Cmd):
         (Ctrl+D or Ctrl+Z) EOF signal to exit the program
         """
         return True
-   
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
