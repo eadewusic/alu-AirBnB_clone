@@ -31,6 +31,12 @@ class HBNBCommand(cmd.Cmd):
                "City": City, "Place": Place, "Review": Review,
                "State": State, "User": User}
 
+    def emptyline(self):
+        """
+        Overrides the default emptyline method to do nothing
+        """
+        pass
+
     def do_create(self, args):
         '''
         Creates and saves a new object
@@ -159,7 +165,6 @@ class HBNBCommand(cmd.Cmd):
         """
         return True
    
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
