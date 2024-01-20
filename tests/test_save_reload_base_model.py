@@ -3,6 +3,7 @@ import unittest
 from models.base_model import BaseModel
 from models import storage
 
+
 class TestSaveReloadBaseModel(unittest.TestCase):
     def create_and_save_model(self):
         # Create a new object
@@ -17,6 +18,7 @@ class TestSaveReloadBaseModel(unittest.TestCase):
         for obj_id in all_objs.keys():
             obj = all_objs[obj_id]
             print(obj)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -9,6 +9,7 @@ class TestStateClass(unittest.TestCase):
     ''''TestStateClass' class. Used to test
     the definition of the 'State' class.
     '''
+
     def setUp(self):
         '''Sets up variables for use in later parts of the test.
         '''

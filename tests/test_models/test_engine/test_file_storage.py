@@ -1,6 +1,7 @@
 import unittest
 from models.engine.file_storage import Storage
 
+
 class TestFileStorage(unittest.TestCase):
     def test_all_method(self):
         storage = Storage()
@@ -11,6 +12,7 @@ class TestFileStorage(unittest.TestCase):
     def test_new_method(self):
         storage = Storage()
         # Create a dummy object to test the new method
+
         class DummyObject:
             def __init__(self, id):
                 self.id = id
@@ -25,6 +27,7 @@ class TestFileStorage(unittest.TestCase):
     def test_save_and_reload_methods(self):
         storage = Storage()
         # Create a dummy object to test save and reload methods
+
         class DummyObject:
             def __init__(self, id):
                 self.id = id
@@ -40,6 +43,7 @@ class TestFileStorage(unittest.TestCase):
         new_storage = Storage()
         new_storage.reload()
         self.assertIn('DummyObject.dummy_id', new_storage.all())
+
 
 if __name__ == '__main__':
     unittest.main()

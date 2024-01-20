@@ -1,6 +1,7 @@
 # models/place.py
 from .base_model import BaseModel
 
+
 class Place(BaseModel):
     """Place class for the HBNB project."""
     city_id = ""

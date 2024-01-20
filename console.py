@@ -20,7 +20,7 @@ import sys
 class HBNBCommand(cmd.Cmd):
     """
     HBNBCommand class for the command interpreter.
-    
+
     commands:
     quit - exit the program
     EOF - exit the program
@@ -139,9 +139,10 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
         else:
-            class_objs = {k: v for k, v in FileStorage().all().items() if args in k}
+            class_objs = {
+                k: v for k,
+                v in FileStorage().all().items() if args in k}
             print(len(class_objs))
-
 
     def do_quit(self, args):
         """
@@ -149,6 +150,7 @@ class HBNBCommand(cmd.Cmd):
         """
         print("Goodbye!")
         return True
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
