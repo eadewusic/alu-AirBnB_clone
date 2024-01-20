@@ -4,6 +4,7 @@ import sys
 import os
 from models.base_model import BaseModel
 
+
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
     __file_path = 'file.json'
@@ -41,7 +42,8 @@ class FileStorage:
                     class_name = value.get("__class__")
                     if class_name:
                         cls = globals().get(class_name)
-                        if cls and inspect.isclass(cls) and issubclass(cls, BaseModel):
+                        if cls and inspect.isclass(
+                                cls) and issubclass(cls, BaseModel):
                             FileStorage.__objects[key] = cls(**value)
         except FileNotFoundError:
             pass
