@@ -161,7 +161,12 @@ class HBNBCommand(cmd.Cmd):
     
     def cmdloop(self, intro=None):
         print("Entering cmdloop")
-        return super().cmdloop(intro)
+        try:
+            return super().cmdloop(intro)
+        except KeyboardInterrupt:
+            print("Exiting cmdloop due to KeyboardInterrupt")
+        except EOFError:
+            print("Exiting cmdloop due to EOFError")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
