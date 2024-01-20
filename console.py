@@ -158,15 +158,9 @@ class HBNBCommand(cmd.Cmd):
         (Ctrl+D or Ctrl+Z) EOF signal to exit the program
         """
         return True
-    
-    def cmdloop(self, intro=None):
-        print("Entering cmdloop")
-        try:
-            return super().cmdloop(intro)
-        except KeyboardInterrupt:
-            print("Exiting cmdloop due to KeyboardInterrupt")
-        except EOFError:
-            print("Exiting cmdloop due to EOFError")
+   
+   def emptyline(self):
+       pass
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
