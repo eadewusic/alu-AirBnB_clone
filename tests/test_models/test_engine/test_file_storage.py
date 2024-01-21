@@ -69,6 +69,17 @@ class TestFileStorage(unittest.TestCase):
         storage.new(base_model_instance)
         storage.save()
 
+        class DummyObject:
+            def __init__(self, id):
+                self.id = id
+
+            def to_dict(self):
+                return {'id': self.id, '__class__': type(self).__name__}
+
+        dummy_instance = DummyObject(id='dummy_id')
+        storage.new(dummy_instance)
+        storage.save()
+
         # Create a new storage instance to test the reload method
         new_storage = FileStorage()
         new_storage.reload()
