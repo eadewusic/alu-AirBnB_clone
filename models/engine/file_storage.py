@@ -1,4 +1,5 @@
 import unittest
+from models import FileStorage
 
 class TestFileStorage(unittest.TestCase):
     def test_all_method(self):
