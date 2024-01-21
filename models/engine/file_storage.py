@@ -1,54 +1,39 @@
 import json
-import inspect
-from models.base_model import BaseModel
-
+from os.path import isfile
 
 class FileStorage:
-    """This class manages storage of hbnb models in JSON format"""
-    __file_path = 'file.json'
+    __file_path = "file.json"
     __objects = {}
 
+    @property
+    def _FileStorage__file_path(self):
+        return self.__class__.__file_path
+
+    @property
+    def _FileStorage__objects(self):
+        return self.__class__.__objects
+
     def all(self):
-        """Returns the dictionary __objects"""
-        return FileStorage.__objects.copy()
+        return self.__objects
 
     def new(self, obj):
-        """Sets in __objects the obj with key <obj class name>.id"""
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        FileStorage.__objects[key] = obj
-        self.save()  # Save the object immediately after adding
-
-    def delete(self, key):
-        """Deletes an object from __objects if it is inside"""
-        if key in FileStorage.__objects.keys():
-            del FileStorage.__objects[key]
-            self.save()
+        self.__objects[key] = obj
 
     def save(self):
-        """Serializes __objects to the JSON file (path: __file_path)"""
-        with open(FileStorage.__file_path, "w", encoding='utf-8') as f:
-            casted_dict = {}
-            for key, value in FileStorage.__objects.items():
-                casted_dict[key] = value.to_dict()
-            json.dump(casted_dict, f)
+        data = {}
+        for key, obj in self.__objects.items():
+            data[key] = obj.to_dict()
+        with open(self._FileStorage__file_path, 'w', encoding='utf-8') as file:
+            json.dump(data, file)
 
     def reload(self):
-        """Deserializes the JSON file to __objects"""
-        try:
-            with open(FileStorage.__file_path, "r", encoding='utf-8') as f:
-                data = json.load(f)
+        if isfile(self._FileStorage__file_path):
+            with open(self._FileStorage__file_path, 'r', encoding='utf-8') as file:
+                data = json.load(file)
                 for key, value in data.items():
-                    class_name = value.get("__class__")
-                    if class_name:
-                        cls = globals().get(class_name)
-                        if cls and inspect.isclass(
-                                cls) and issubclass(cls, BaseModel):
-                            FileStorage.__objects[key] = cls(**value)
-        except FileNotFoundError:
-            pass
-        except json.JSONDecodeError:
-            pass
-        except NameError:
-            pass
-        except IOError:
-            pass
+                    class_name, obj_id = key.split('.')
+                    obj = eval(class_name)(**value)
+                    self.__objects[key] = obj
+        else:
+            print("File not found. No objects loaded.")
