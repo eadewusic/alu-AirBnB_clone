@@ -4,7 +4,6 @@ import uuid
 from datetime import datetime
 from models import storage
 
-
 class BaseModel:
     """A base class for all hbnb models"""
 
@@ -30,10 +29,7 @@ class BaseModel:
         return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
 
     def save(self):
-        '''
-        Updates the public instance attribute
-        updated_at with the current datetime
-        '''
+        """Updates updated_at with current time when instance is changed"""
         self.updated_at = datetime.now()
         storage.save()
 
