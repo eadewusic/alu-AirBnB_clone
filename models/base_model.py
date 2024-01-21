@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """This module defines a base class for all models in our hbnb clone"""
+import copy
 import uuid
 from datetime import datetime
 
@@ -32,7 +33,10 @@ class BaseModel:
         """Updates updated_at with current time when instance is changed"""
         from models import storage
         self.updated_at = datetime.now()
+        copy_datetime_dict = copy.deepcopy(self.__dict__)
+        self.to_dict()
         storage.save()
+        self.__dict__ = copy_datetime_dict
 
     def to_dict(self):
         """Convert instance into dict format"""
