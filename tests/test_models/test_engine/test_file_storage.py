@@ -7,7 +7,6 @@ class TestFileStorage(unittest.TestCase):
         storage = FileStorage()
         objects = storage.all()
         self.assertIsInstance(objects, dict)
-        # Add more test cases specific to the FileStorage model
 
     def test_new_method(self):
         storage = FileStorage()
