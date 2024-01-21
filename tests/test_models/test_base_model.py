@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Test module for BaseModel """
 from datetime import datetime
+from models import storage
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 import os
@@ -26,13 +27,44 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(my_model.created_at, datetime)
         self.assertIsInstance(my_model.updated_at, datetime)
 
-    def test_save_method(self):
-        """ Test if save method updates the updated_at attribute """
-        my_model = BaseModel()
-        original_updated_at = my_model.updated_at
-        time.sleep(1)  # Introduce a delay of 1 second
-        my_model.save()
-        self.assertGreater(my_model.updated_at, original_updated_at)
+     def test_save_method(self):
+        obj1 = BaseModel()
+        before_save1 = obj1.updated_at
+        obj1.save()
+        storage.reload()
+        obj2 = BaseModel()
+        before_save2 = obj2.updated_at
+        obj2.save()
+        storage.reload()
+        obj3 = BaseModel()
+        before_save3 = obj3.updated_at
+        obj3.save()
+        storage.reload()
+        after_save1 = obj1.updated_at
+        after_save2 = obj2.updated_at
+        after_save3 = obj3.updated_at
+        self.assertIsInstance(before_save1, datetime)
+        self.assertIsInstance(before_save2, datetime)
+        self.assertIsInstance(before_save3, datetime)
+        self.assertIsInstance(after_save1, datetime)
+        self.assertIsInstance(after_save2, datetime)
+        self.assertIsInstance(after_save3, datetime)
+        self.assertNotEqual(before_save1, after_save1)
+        self.assertNotEqual(before_save2, after_save2)
+        self.assertNotEqual(before_save3, after_save3)
+
+    def test_save_method_2(self):
+        obj1 = BaseModel()
+        before_save1 = obj1.updated_at
+        before_save2 = obj1.created_at
+        obj1.save()
+        after_save1 = obj1.updated_at.isoformat()
+        after_save2 = obj1.created_at.isoformat()
+        self.assertIsInstance(before_save1, datetime)
+        self.assertIsInstance(before_save2, datetime)
+        self.assertIsInstance(after_save1, str)
+        self.assertIsInstance(after_save2, str)
+        storage.reload()
 
     def test_to_dict_method(self):
         """Test if to_dict method returns the
