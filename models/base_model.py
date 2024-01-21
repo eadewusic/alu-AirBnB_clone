@@ -2,7 +2,6 @@
 """This module defines a base class for all models in our hbnb clone"""
 import uuid
 from datetime import datetime
-
 from models import storage
 
 
@@ -35,7 +34,6 @@ class BaseModel:
         Updates the public instance attribute
         updated_at with the current datetime
         '''
-
         self.updated_at = datetime.now()
         storage.save()
 
