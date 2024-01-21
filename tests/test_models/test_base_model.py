@@ -27,32 +27,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(my_model.created_at, datetime)
         self.assertIsInstance(my_model.updated_at, datetime)
 
-    def test_save_method(self):
-        obj1 = BaseModel()
-        before_save1 = obj1.updated_at
-        obj1.save()
-        storage.reload()
-        obj2 = BaseModel()
-        before_save2 = obj2.updated_at
-        obj2.save()
-        storage.reload()
-        obj3 = BaseModel()
-        before_save3 = obj3.updated_at
-        obj3.save()
-        storage.reload()
-        after_save1 = obj1.updated_at
-        after_save2 = obj2.updated_at
-        after_save3 = obj3.updated_at
-        self.assertIsInstance(before_save1, datetime)
-        self.assertIsInstance(before_save2, datetime)
-        self.assertIsInstance(before_save3, datetime)
-        self.assertIsInstance(after_save1, datetime)
-        self.assertIsInstance(after_save2, datetime)
-        self.assertIsInstance(after_save3, datetime)
-        self.assertNotEqual(before_save1, after_save1)
-        self.assertNotEqual(before_save2, after_save2)
-        self.assertNotEqual(before_save3, after_save3)
-
     def test_save_method_2(self):
         obj1 = BaseModel()
         before_save1 = obj1.updated_at
