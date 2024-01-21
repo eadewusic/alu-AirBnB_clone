@@ -42,16 +42,14 @@ class HBNBCommand(cmd.Cmd):
         Creates and saves a new object
         ex: create BaseModel
         '''
-        if args and args.strip():
-            class_name = args.strip()
-            if class_name in self.classes:
-                new_instance = self.classes[class_name]()
-                new_instance.save()
-                print(new_instance.id)
-            else:
-                print(f"** '{class_name}' class doesn't exist **")
+        if not args:
+            print("**class name missing**")
+        elif args not in self.classes:
+            print("**class doesn't exist**")
         else:
-            print("** class name missing **")
+            new_instance = self.classes[args]()
+            new_instance.save()
+            print(new_instance.id)
 
     def do_show(self, args):
         '''
