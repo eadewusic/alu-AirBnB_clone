@@ -5,7 +5,6 @@ import inspect
 import json
 import sys
 
-
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
     __file_path = 'file.json'
@@ -31,7 +30,7 @@ class FileStorage:
     def reload(self):
         """Loads storage dictionary from file"""
         classes = {cls.__name__: cls for name, cls in inspect.getmembers(
-            sys.modules[__name__], inspect.isclass)}
+                sys.modules[__name__], inspect.isclass)}
 
         try:
             temp = {}
