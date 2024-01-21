@@ -18,6 +18,7 @@ class FileStorage:
         """Sets in __objects the obj with key <obj class name>.id"""
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         FileStorage.__objects[key] = obj
+        self.save()  # Save the object immediately after adding
 
     def delete(self, key):
         """Deletes an object from __objects if it is inside"""
