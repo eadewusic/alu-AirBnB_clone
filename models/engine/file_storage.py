@@ -1,31 +1,55 @@
 import json
-from os.path import isfile
+import inspect
+import sys
+from models.base_model import BaseModel
+
 
 class FileStorage:
-    __file_path = "file.json"
+    """This class manages storage of hbnb models in JSON format"""
+    __file_path = 'file.json'
     __objects = {}
 
     def all(self):
-        return self.__objects
+        """Returns the dictionary __objects"""
+        return FileStorage.__objects.copy()
 
     def new(self, obj):
+        """Sets in __objects the obj with key <obj class name>.id"""
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.__objects[key] = obj
+        FileStorage.__objects[key] = obj
+        self.save()  # Save the object immediately after adding
+
+    def delete(self, key):
+        """Deletes an object from __objects if it is inside"""
+        if key in FileStorage.__objects.keys():
+            del FileStorage.__objects[key]
+            self.save()
 
     def save(self):
-        data = {}
-        for key, obj in self.__objects.items():
-            data[key] = obj.to_dict()
-        with open(self.__file_path, 'w', encoding='utf-8') as file:
-            json.dump(data, file)
+        """Serializes __objects to the JSON file (path: __file_path)"""
+        with open(FileStorage.__file_path, "w", encoding='utf-8') as f:
+            casted_dict = {}
+            for key, value in FileStorage.__objects.items():
+                casted_dict[key] = value.to_dict()
+            json.dump(casted_dict, f)
 
     def reload(self):
-        if isfile(self.__file_path):
-            with open(self.__file_path, 'r', encoding='utf-8') as file:
-                data = json.load(file)
+        """Deserializes the JSON file to __objects"""
+        try:
+            with open(FileStorage.__file_path, "r", encoding='utf-8') as f:
+                data = json.load(f)
                 for key, value in data.items():
-                    class_name, obj_id = key.split('.')
-                    obj = eval(class_name)(**value)
-                    self.__objects[key] = obj
-        else:
-            print("File not found. No objects loaded.")
+                    class_name = value.get("__class__")
+                    if class_name:
+                        cls = globals().get(class_name)
+                        if cls and inspect.isclass(
+                                cls) and issubclass(cls, BaseModel):
+                            FileStorage.__objects[key] = cls(**value)
+        except FileNotFoundError:
+            pass
+        except json.JSONDecodeError:
+            pass
+        except NameError:
+            pass
+        except IOError:
+            pass
