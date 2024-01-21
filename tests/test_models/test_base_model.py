@@ -27,7 +27,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(my_model.created_at, datetime)
         self.assertIsInstance(my_model.updated_at, datetime)
 
-     def test_save_method(self):
+    def test_save_method(self):
         obj1 = BaseModel()
         before_save1 = obj1.updated_at
         obj1.save()

@@ -45,7 +45,8 @@ class TestFileStorage(unittest.TestCase):
         new_storage = FileStorage()
         new_storage.reload()
         self.assertIn('DummyObject.dummy_id', new_storage.all())
-        # Add more assertions or specific test cases for save() and reload() methods
+        # Add more assertions or specific test cases for save()
+        # and reload() methods
 
     def test_reload_nonexistent_file(self):
         # Test reloading from a nonexistent file
