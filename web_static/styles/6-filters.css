@@ -9,12 +9,15 @@
 
 .locations,
 .amenities {
-    display: inline-block;
+    display: inline;
     vertical-align: middle;
-    float: left;
+	float: left;
     height: 100%;
-    width: 25%;
     line-height: 20px;
+}
+
+.locations {
+    width: 27%;
     border-right: 1px solid #DDDDDD;
 }
 

@@ -3,43 +3,52 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Header and Footer</title>
-    <link rel="stylesheet" type="text/css" href="styles/4-common.css">
-    <link rel="stylesheet" type="text/css" href="styles/3-header.css">
-    <link rel="stylesheet" type="text/css" href="styles/3-footer.css">
-    <link rel="stylesheet" type="text/css" href="styles/6-filters.css">
-    <link rel="stylesheet" type="text/css" href="styles/7-places.css">
-    <link rel="icon" type="image/png" href="images/icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7. Display results</title>
+    <link rel="stylesheet" href="styles/4-common.css">
+    <link rel="stylesheet" href="styles/3-header.css">
+    <link rel="stylesheet" href="styles/3-footer.css">
+    <link rel="stylesheet" href="styles/6-filters.css">
+    <link rel="stylesheet" href="styles/7-places.css">
 </head>
 
 <body>
 
+    <!-- Header -->
     <header>
-        <div class="logo"></div>
+        <img src="images/logo.png" alt="Logo" id="header_logo">
     </header>
 
+    <!-- Container -->
     <div class="container">
 
+        <!-- Filters Section -->
         <section class="filters">
-            
-            <button class="search-button">Search</button>
-            
+            <button>Search</button>
             <div class="locations">
                 <h3>States</h3>
                 <h4>California, Arizona...</h4>
-                <ul class="popover">
+                <ul class="dropdown">
                     <li>
-                        <h2>Arizona:</h2>
+                        <h2>Arizona</h2>
                         <ul>
-                           <li>Page</li>
-                           <li>Page2</li> 
+                            <li>
+                                <h4>Page</h4>
+                            </li>
+                            <li>
+                                <h4>Page2</h4>
+                            </li>
                         </ul>
                     </li>
                     <li>
-                        <h2>California:</h2>
+                        <h2>California</h2>
                         <ul>
-                            <li>San Francisco</li>
-                            <li>Los Altos</li>
+                            <li>
+                                <h4>San Francisco</h4>
+                            </li>
+                            <li>
+                                <h4>Los Altos</h4>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -48,38 +57,48 @@
             <div class="amenities">
                 <h3>Amenities</h3>
                 <h4>Internet, Kitchen...</h4>
-                <ul class="popover">
-                    <li>Internet</li>
-                    <li>TV</li>
-                    <li>Kitchen</li>
-                    <li>Iron</li>
+                <ul class="dropdown">
+                    <li>
+                        <h4>Internet</h4>
+                    </li>
+                    <li>
+                        <h4>TV</h4>
+                    </li>
+                    <li>
+                        <h4>Kitchen</h4>
+                    </li>
+                    <li>
+                        <h4>Iron</h4>
+                    </li>
                 </ul>
             </div>
-
         </section>
+
+        <!-- Places Section -->
         <section class="places">
-            
-            <div class="places_title">
-                <h1>Places</h1>
-            </div>
-            
-            <div class="articles">
-                <article>
-                    <h2>My Home</h2>
-                </article>
-                <article>
-                    <h2>Tiny House</h2>
-                </article>
-                <article>
-                    <h2>A Suite</h2>
-                </article>
-            </div>
+            <h1>Places</h1>
+
+            <!-- Place Listing 1 -->
+            <article>
+                <h2>My home</h2>
+            </article>
+
+            <!-- Place Listing 2 -->
+            <article>
+                <h2>Tiny house</h2>
+            </article>
+
+            <!-- Place Listing 3 -->
+            <article>
+                <h2>A suite</h2>
+            </article>
 
         </section>
     </div>
-    
+
+    <!-- Footer -->
     <footer>
-        Best School
+        <p>Best School</p>
     </footer>
 
 </body>
