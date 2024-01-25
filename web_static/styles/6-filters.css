@@ -7,23 +7,15 @@
 	border-radius: 4px;
 }
 
-.locations {
-	display: inline;
-	vertical-align: middle;
-	float: left;
-	height: 100%;
-	width: 25%;
-	line-height: 20px;
-	border-right: 1px solid #DDDDDD;
-}
-
+.locations,
 .amenities {
-	display: inline;
-	vertical-align: middle;
-	height: 100%;
-	float: left;
+    display: inline-block;
+    vertical-align: middle;
+    float: left;
+    height: 100%;
     width: 25%;
-	line-height: 20px;
+    line-height: 20px;
+    border-right: 1px solid #DDDDDD;
 }
 
 .dropdown {
