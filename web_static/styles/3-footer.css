@@ -1,5 +1,5 @@
 footer {
-    background-color: #1f5ba8; /* Updated color to a shade of blue */
+    background-color: #1f5ba8;
     color: white;
     height: 60px;
     width: 100%;
@@ -10,4 +10,5 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-}
+  }
+  
