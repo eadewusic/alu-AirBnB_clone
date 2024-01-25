@@ -26,14 +26,6 @@ article {
     margin-bottom: 3rem;
 }
 
-.headline {
-	display: flex;
-	flex-direction: row;
-	position: relative;
-	height: 80px;	
-	width: 100%;
-}
-
 .price_by_night {
     color: #ff5a5f;
     border: 4px solid #ff5a5f;
